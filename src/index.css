@@ -4,8 +4,8 @@
   --clr-black-main: #121212;
   --clr-black-secondary: #1a1a1a;
   --clr-black-focus: #212121;
-  --clr-text-main: rgba(255, 255, 255, 87);
-  --clr-text-secondary: rgba(255, 255, 255, 67);
+  --clr-text-main: rgba(255, 255, 255, 0.87);
+  --clr-text-secondary: rgba(255, 255, 255, 0.67);
   --clr-action-main: #673ab7;
   --clr-action-secondary: #d39e00;
 }

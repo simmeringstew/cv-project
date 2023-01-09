@@ -36,18 +36,18 @@ const General = ({ displayGeneral }) => {
         inputs.forEach(input => input.classList = "input");
     }
 
-    const submit = () => {
+    const add = () => {
         displayGeneral(name, email, number);
     }
 
-    const enterSubmit = (e) => {
+    const enterAdd = (e) => {
         if (e.key === "Enter") {
             displayGeneral(name, email, number);
         }
     }
 
     return (
-        <div className="form-element general" onKeyDown={enterSubmit}>
+        <div className="form-element general" onKeyDown={enterAdd}>
             <h2 className="form-title">General Info</h2>
             <div className="input-group">
                 <input type="text" autoComplete="off" className="input" id="fullName" value={name} onChange={updateName} onFocus={focusElement} onBlur={removeFocusElement} />
@@ -63,7 +63,7 @@ const General = ({ displayGeneral }) => {
             </div>
             <div className="submit-reset">
                 <button className="btn-light" onClick={resetElements}>Reset</button>
-                <button className="btn-color" onClick={submit}>Submit</button>
+                <button className="btn-color" onClick={add}>Add</button>
             </div>
         </div>
     );

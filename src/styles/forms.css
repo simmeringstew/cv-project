@@ -54,6 +54,10 @@
     gap: 1rem;
 }
 
+.btn-color, .btn-light {
+    width: 8rem;
+}
+
 .btn-color {
     display: inline-block;
     outline: none;
