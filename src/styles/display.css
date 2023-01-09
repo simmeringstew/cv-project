@@ -1,0 +1,15 @@
+.info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.info-section > h2 {
+    font-size: 2rem;
+}
+
+.email-number {
+    display: flex;
+    gap: 0.5rem;
+}
