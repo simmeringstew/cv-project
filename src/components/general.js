@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const General = ({ displayGeneral }) => {
+const General = ({ displayGeneral, clearGeneral }) => {
 
     const focusElement = (e) => {
         e.target.className = "input focused";
@@ -34,20 +34,23 @@ const General = ({ displayGeneral }) => {
         setNumber("");
         setEmail("");
         inputs.forEach(input => input.classList = "input");
+        clearGeneral();
     }
 
-    const add = () => {
+    const add = (e) => {
+        e.preventDefault();
         displayGeneral(name, email, number);
     }
 
     const enterAdd = (e) => {
         if (e.key === "Enter") {
+            e.preventDefault();
             displayGeneral(name, email, number);
         }
     }
 
     return (
-        <div className="form-element general" onKeyDown={enterAdd}>
+        <form className="form-element general" onKeyDown={enterAdd}>
             <h2 className="form-title">General Info</h2>
             <div className="input-group">
                 <input type="text" autoComplete="off" className="input" id="fullName" value={name} onChange={updateName} onFocus={focusElement} onBlur={removeFocusElement} />
@@ -65,7 +68,7 @@ const General = ({ displayGeneral }) => {
                 <button className="btn-light" onClick={resetElements}>Reset</button>
                 <button className="btn-color" onClick={add}>Add</button>
             </div>
-        </div>
+        </form>
     );
 }
 
