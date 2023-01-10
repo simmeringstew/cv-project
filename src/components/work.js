@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Work = ({ data, addWork, addJobArea }) => {
+const Work = ({ data, addWork, addJobArea, removeJobArea }) => {
 
     const focusElement = (e) => {
         e.target.className = "input focused";
@@ -10,6 +10,14 @@ const Work = ({ data, addWork, addJobArea }) => {
         if (!e.target.value) {
             e.target.className = "input";
         }
+    }
+
+    const createData = () => {
+        data.jobTitle = jobTitle;
+        data.company = company;
+        data.startDate = startDate;
+        data.endDate = endDate;
+        data.description = description;
     }
 
     const [jobTitle, setJobTitle] = useState(data.jobTitle);
@@ -41,24 +49,25 @@ const Work = ({ data, addWork, addJobArea }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        data.jobTitle = jobTitle;
-        data.company = company;
-        data.startDate = startDate;
-        data.endDate = endDate;
-        data.description = description;
+        createData();
         addWork(data);
     }
 
     const addNew = (e) => {
         e.preventDefault();
-        data.jobTitle = jobTitle;
-        data.company = company;
-        data.startDate = startDate;
-        data.endDate = endDate;
-        data.description = description;
+        createData();
         addJobArea(data);
     }
 
+    const toggleRemove = (e) => {
+        e.preventDefault();
+        createData();
+        removeJobArea(data);
+    }
+
+    if (data.id <= 0) {
+        return
+    }
     return (
         <div>
             <form className="form-element work" onSubmit={submit}>
@@ -87,7 +96,7 @@ const Work = ({ data, addWork, addJobArea }) => {
                     <button className="add-new" onClick={addNew}>+</button>
                     <button className="btn-light" onClick={resetElements}>Reset</button>
                     <button className="btn-color" type="submit">Submit</button>
-                    <button className="remove">-</button>
+                    <button className="remove" onClick={toggleRemove}>-</button>
                 </div>
             </form>
         </div>
