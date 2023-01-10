@@ -4,36 +4,39 @@ import { useState } from "react";
 import General from "./components/general";
 import GeneralDisplay from "./components/generalDisplay";
 import Work from "./components/work";
+import WorkDisplay from "./components/workDisplay";
 // css imports 
 import "./styles/app.css";
 import "./styles/forms.css";
 import "./styles/display.css";
 
-const App = () => {
+const App = ({ workTemplate }) => {
 
   // for the general info
   const [generalInfo, setGeneralInfo] = useState(null);
   const displayGeneral = (name, email, number) => {
     const generalObject = {
-      name: name,
-      email: email,
-      number: number
+      name: name.trim(),
+      email: email.trim(),
+      number: number.trim()
     }
     setGeneralInfo(generalObject);
   }
   const clearGeneral = () => {setGeneralInfo(null);}
 
   // work experience section
-  const [workComponents, setWorkComponents] = useState([
-    {
-      company: null,
-      jobTitle: null,
-      startDate: null,
-      endDate: null,
-      description: null,
-      id: 1
+  const [workComponents, setWorkComponents] = useState([workTemplate]);
+  const addWork = (data) => {
+    const updatedWork = {
+      jobTitle: data.jobTitle.trim(),
+      company: data.company.trim(),
+      startDate: data.startDate.trim(),
+      endDate: data.endDate.trim(),
+      description: data.description.trim(),
+      id: data.id
     }
-  ]);
+    setWorkComponents(workComponents.map(component => component.id !== updatedWork.id ? component : updatedWork));
+  }
 
   return (
     <div>
@@ -46,7 +49,7 @@ const App = () => {
           <h2 className="form-title">Work Experience</h2>
           <div>
             {workComponents.map(component => 
-            <Work key={component.id} />
+            <Work key={component.id} data={component} addWork={addWork} />
             )}
           </div>
           {/* education - expandable */}
@@ -54,7 +57,11 @@ const App = () => {
         </section>
         <section className={"show"}>
           <GeneralDisplay info={generalInfo} />
-          {/* display things as they are made */}
+          <div>
+            {workComponents.map(component =>
+            <WorkDisplay key={component.id} data={component} />
+            )}
+          </div>
           {/* once all are full add a print button turn section into pdf */}
         </section>
       </main>

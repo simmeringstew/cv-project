@@ -13,19 +13,13 @@ const General = ({ displayGeneral, clearGeneral }) => {
     }
 
     const [name, setName] = useState("");
-    const updateName = (e) => {
-        setName(e.target.value);
-    }
+    const updateName = (e) => {setName(e.target.value);}
 
     const [email, setEmail] = useState("");
-    const updateEmail = (e) => {
-        setEmail(e.target.value);
-    }
+    const updateEmail = (e) => {setEmail(e.target.value);}
 
     const [number, setNumber] = useState("");
-    const updateNumber = (e) => {
-        setNumber(e.target.value);
-    }
+    const updateNumber = (e) => {setNumber(e.target.value);}
 
     const resetElements = () => {
         const general = document.querySelector(".general");
@@ -37,21 +31,14 @@ const General = ({ displayGeneral, clearGeneral }) => {
         clearGeneral();
     }
 
-    const add = (e) => {
+    const submit = (e) => {
         e.preventDefault();
         displayGeneral(name, email, number);
     }
 
-    const enterAdd = (e) => {
-        if (e.key === "Enter") {
-            e.preventDefault();
-            displayGeneral(name, email, number);
-        }
-    }
-
     return (
-        <form className="form-element general" onKeyDown={enterAdd}>
-            <h2 className="form-title">General Info</h2>
+        <form className="form-element general" onSubmit={submit}>
+            <h2 className="in-form-title">General Info</h2>
             <div className="input-group">
                 <input type="text" autoComplete="off" className="input" id="fullName" value={name} onChange={updateName} onFocus={focusElement} onBlur={removeFocusElement} />
                 <label className="user-label" htmlFor="fullName">Your Name</label>
@@ -66,7 +53,7 @@ const General = ({ displayGeneral, clearGeneral }) => {
             </div>
             <div className="submit-reset">
                 <button className="btn-light" onClick={resetElements}>Reset</button>
-                <button className="btn-color" onClick={add}>Add</button>
+                <button className="btn-color" type="submit">Add</button>
             </div>
         </form>
     );

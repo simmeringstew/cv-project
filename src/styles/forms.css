@@ -4,9 +4,13 @@
     gap: 1rem;
 }
 
-.form-title {
+.in-form-title, .form-title {
     font-size: 1.3rem;
     text-decoration: underline;
+}
+
+.form-title {
+    margin-bottom: 1rem;
 }
 
 /* Input elements */
