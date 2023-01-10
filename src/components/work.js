@@ -84,9 +84,10 @@ const Work = ({ data, addWork, addJobArea }) => {
                     <label className="user-label" htmlFor="description">Description</label>
                 </div>
                 <div className="submit-reset">
-                    <button className="btn-light add-new" onClick={addNew}>Add New</button>
+                    <button className="add-new" onClick={addNew}>+</button>
                     <button className="btn-light" onClick={resetElements}>Reset</button>
                     <button className="btn-color" type="submit">Submit</button>
+                    <button className="remove">-</button>
                 </div>
             </form>
         </div>

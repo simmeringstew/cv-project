@@ -8,7 +8,8 @@
   --clr-text-secondary: rgba(255, 255, 255, 0.67);
   --clr-action-main: #673ab7;
   --clr-action-secondary: #d39e00;
-  --clr-action-tertiary: #4caf50;
+  --clr-action-good: #4caf50;
+  --clr-action-bad: #f44336;
 }
 
 *, *::before, *::after {
