@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Work = ({ data, addWork }) => {
+const Work = ({ data, addWork, addJobArea }) => {
 
     const focusElement = (e) => {
         e.target.className = "input focused";
@@ -49,9 +49,18 @@ const Work = ({ data, addWork }) => {
         addWork(data);
     }
 
+    const addNew = (e) => {
+        e.preventDefault();
+        data.jobTitle = jobTitle;
+        data.company = company;
+        data.startDate = startDate;
+        data.endDate = endDate;
+        data.description = description;
+        addJobArea(data);
+    }
+
     return (
         <div>
-        {/* remove button to delete it */}
             <form className="form-element work" onSubmit={submit}>
                 <h3>Job: {data.id}</h3>
                 <div className="input-group">
@@ -75,11 +84,11 @@ const Work = ({ data, addWork }) => {
                     <label className="user-label" htmlFor="description">Description</label>
                 </div>
                 <div className="submit-reset">
+                    <button className="btn-light add-new" onClick={addNew}>Add New</button>
                     <button className="btn-light" onClick={resetElements}>Reset</button>
-                    <button className="btn-color" type="submit">Add</button>
+                    <button className="btn-color" type="submit">Submit</button>
                 </div>
             </form>
-        {/* add button to add a new one underneath */}
         </div>
     );
 }

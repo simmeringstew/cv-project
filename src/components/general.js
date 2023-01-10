@@ -53,7 +53,7 @@ const General = ({ displayGeneral, clearGeneral }) => {
             </div>
             <div className="submit-reset">
                 <button className="btn-light" onClick={resetElements}>Reset</button>
-                <button className="btn-color" type="submit">Add</button>
+                <button className="btn-color" type="submit">Submit</button>
             </div>
         </form>
     );

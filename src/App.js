@@ -37,6 +37,22 @@ const App = ({ workTemplate }) => {
     }
     setWorkComponents(workComponents.map(component => component.id !== updatedWork.id ? component : updatedWork));
   }
+  const addJobArea = (data) => {
+    const newJobArea = {...workTemplate, id: data.id + 1};
+    const lessThan = workComponents.filter(component => component.id < newJobArea.id);
+    const onesToChange = workComponents.filter(component => component.id >= newJobArea.id);
+    const addedOne = onesToChange.map(addOneToId);
+    if (onesToChange.length > 0) {
+      setWorkComponents([...lessThan, newJobArea, ...addedOne]);
+    }
+    else {
+      setWorkComponents([...lessThan, newJobArea]);
+    }
+  }
+  function addOneToId(component) {
+    component.id += 1;
+    return component;
+  }
 
   return (
     <div>
@@ -49,7 +65,7 @@ const App = ({ workTemplate }) => {
           <h2 className="form-title">Work Experience</h2>
           <div>
             {workComponents.map(component => 
-            <Work key={component.id} data={component} addWork={addWork} />
+            <Work key={component.id} data={component} addWork={addWork} addJobArea={addJobArea} />
             )}
           </div>
           {/* education - expandable */}

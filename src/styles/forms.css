@@ -56,6 +56,7 @@
     align-self: flex-end;
     display: flex;
     gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .btn-color, .btn-light {
@@ -100,4 +101,9 @@
 
 .btn-light:is(:hover, :focus) {
     background: var(--clr-black-focus);
+}
+
+.add-new {
+    border-color: var(--clr-action-tertiary);
+    color: var(--clr-action-tertiary);
 }
