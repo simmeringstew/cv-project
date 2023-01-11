@@ -29,8 +29,9 @@ const App = ({ workExperienceTemplate }) => {
     setWorkExperience(copy);
   }
   const addNewWork = () => {
-    const newTemplate = {workExperienceTemplate, id : workExperience.length + 1};
-    setWorkExperience([...workExperience, newTemplate]);
+    const newTemplate = {...workExperienceTemplate};
+    newTemplate.id = workExperience.length + 1;
+    setWorkExperience(workExperience.concat(newTemplate));
   }
 
 
@@ -52,7 +53,9 @@ const App = ({ workExperienceTemplate }) => {
           {/* skills - auto-expand */}
         </section>
         <section className={"show"}>
-          
+          {workExperience.map(experience =>
+          <WorkDisplay key={experience.id} experience={experience} />
+          )}
         </section>
       </main>
     </div>
