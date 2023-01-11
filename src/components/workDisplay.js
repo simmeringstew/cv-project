@@ -1,5 +1,4 @@
 const WorkDisplay = ({ experience }) => {
-    console.log(experience);
     if (experience.jobTitle === "" && experience.company === "" && experience.startDate === "" && experience.endDate === "" && experience.description === "") {
         return (
             <div></div>

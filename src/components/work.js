@@ -1,93 +1,58 @@
-import { useState } from "react";
+const Work = ({ experience, workExperience, updateWorkExperience, addNewWork }) => {
 
-const Work = ({ workAreaNumber, add, remove, addWorkExperience }) => {
-
-    const focusElement = (e) => {
-        e.target.className = "input focused";
+    const handleInputChange = (e,  id) => {
+        const value = e.target.value;
+        const toChange = e.target.id;
+        const copy = [...workExperience];
+        copy[id - 1][toChange] = value;
+        updateWorkExperience(copy);
     }
 
-    const removeFocusElement = (e) => {
-        if (!e.target.value) {
-            e.target.className = "input";
-        }
+    const handleAdd = () => {
+        addNewWork();
     }
 
-    const [jobTitle, setJobTitle] = useState("");
-    const updateJobTitle = (e) => {setJobTitle(e.target.value);}
-
-    const [company, setCompany] = useState("");
-    const updateCompany = (e) => {setCompany(e.target.value);}
-
-    const [startDate, setStartDate] = useState("");
-    const updateStartDate = (e) => {setStartDate(e.target.value);}
-
-    const [endDate, setEndDate] = useState("");
-    const updateEndDate = (e) => {setEndDate(e.target.value);}
-
-    const [description, setDescription] = useState("");
-    const updateDescription = (e) => {setDescription(e.target.value);}
-
-    const resetElements = () => {
-        const general = document.querySelector(".general");
-        const inputs = general.querySelectorAll(".input");
-        setJobTitle("");
-        setCompany("");
-        setStartDate("");
-        setEndDate("");
-        setDescription("");
-        inputs.forEach(input => input.classList = "input");
+    const handleRemove = (index) => {
+        const lessThan = workExperience.filter(experience => experience.id < index);
+        const moreThan = workExperience.filter(experience => experience.id > index);
+        const removedOne = moreThan.map(experience => removeOne(experience));
+        const removed = [...lessThan, ...removedOne];
+        updateWorkExperience(removed);
     }
-
-    const submit = (e) => {
-        e.preventDefault();
-        const experienceObject = {
-            jobTitle: jobTitle,
-            company: company,
-            startDate: startDate,
-            endDate: endDate,
-            description: description,
-            id: workAreaNumber
-        }
-        addWorkExperience(experienceObject);
-    }
-
-    const addNew = () => {
-        add(workAreaNumber);
-    }
-
-    const removeItem = () => {
-        remove(workAreaNumber);
+    function removeOne(item) {
+        item.id -= 1;
+        return item;
     }
 
     return (
         <div>
-            <form className="form-element work" onSubmit={submit}>
-                <h3>Job: {workAreaNumber}</h3>
+            <form className="form-element work">
+                <h3>Job: {experience.id}</h3>
                 <div className="input-group">
-                    <input type="text" autoComplete="off" className="input" id="jobTitle" value={jobTitle} onChange={updateJobTitle} onFocus={focusElement} onBlur={removeFocusElement} />
+                    <input type="text" autoComplete="off" className="input" id="jobTitle" value={experience.updateJobTitle} onChange={e => handleInputChange(e, experience.id)} />
                     <label className="user-label" htmlFor="jobTitle">Job Title</label>
                 </div>
                 <div className="input-group">
-                    <input type="text" autoComplete="off" className="input" id="company" value={company} onChange={updateCompany} onFocus={focusElement} onBlur={removeFocusElement} />
+                    <input type="text" name="company" autoComplete="off" className="input" id="company" value={experience.company} onChange={e => handleInputChange(e, experience.id)} />
                     <label className="user-label" htmlFor="company">Company</label>
                 </div>
                 <div className="input-group">
-                    <input type="text" autoComplete="off" className="input" id="startDate" value={startDate} onChange={updateStartDate} onFocus={focusElement} onBlur={removeFocusElement} />
+                    <input type="text" autoComplete="off" className="input" id="startDate" value={experience.startDate} onChange={e => handleInputChange(e, experience.id)} />
                     <label className="user-label" htmlFor="startDate">Start Date</label>
                 </div>
                 <div className="input-group">
-                    <input type="text" autoComplete="off" className="input" id="endDate" value={endDate} onChange={updateEndDate} onFocus={focusElement} onBlur={removeFocusElement} />
+                    <input type="text" autoComplete="off" className="input" id="endDate" value={experience.endDate} onChange={e => handleInputChange(e, experience.id)} />
                     <label className="user-label" htmlFor="endDate">End Date</label>
                 </div>
                 <div className="input-group">
-                    <textarea type="text" rows={"6"} autoComplete="off" className="input" id="description" value={description} onChange={updateDescription} onFocus={focusElement} onBlur={removeFocusElement} ></textarea>
+                    <textarea type="text" rows={"6"} autoComplete="off" className="input" id="description" value={experience.description} onChange={e => handleInputChange(e, experience.id)}></textarea>
                     <label className="user-label" htmlFor="description">Description</label>
                 </div>
                 <div className="submit-reset">
-                    <button className="add-new" onClick={addNew} type="button">+</button>
-                    <button className="btn-light" onClick={resetElements} type="button">Reset</button>
+                    {workExperience.length === experience.id && <button className="add-new" type="button" onClick={handleAdd}>+</button>}
+                    <button className="btn-light" type="button">Reset</button>
                     <button className="btn-color" type="submit">Submit</button>
-                    <button className="remove" onClick={removeItem} type="button">-</button>
+                    {(workExperience.length !== 1 && experience.id !== 1) && <button className="remove" type="button" onClick={() => handleRemove(experience.id - 1)}>-</button>}
                 </div>
             </form>
         </div>

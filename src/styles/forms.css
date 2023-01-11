@@ -41,12 +41,12 @@
     transition: 150ms linear;
 }
 
-.focused:focus, .focused:valid {
+.input:focus, .input:valid {
     outline: none;
     border: 1.5px solid var(--clr-action-main);
 }
 
-.focused:focus ~ label, .focused:valid ~ label {
+.input:focus ~ label, .input:valid ~ label {
     transform: translate(-8%, 2%) scale(0.8);
     color: var(--clr-action-main);
 }
