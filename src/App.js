@@ -10,7 +10,7 @@ import "./styles/app.css";
 import "./styles/forms.css";
 import "./styles/display.css";
 
-const App = ({ workTemplate }) => {
+const App = () => {
 
   // for the general info
   const [generalInfo, setGeneralInfo] = useState(null);
@@ -50,6 +50,7 @@ const App = ({ workTemplate }) => {
     const lessThan = amountOfWorkAreas.filter(amount => amount < oneToRemove);
     setAmountOfWorkAreas([...lessThan, ...minusOne]);
   }
+  const [workExperience, setWorkExperience] = useState([]);
 
   return (
     <div>

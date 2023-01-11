@@ -27,7 +27,7 @@ const Work = ({ workAreaNumber, add, remove }) => {
     const [description, setDescription] = useState("");
     const updateDescription = (e) => {setDescription(e.target.value);}
 
-    const resetElements = (e) => {
+    const resetElements = () => {
         const general = document.querySelector(".general");
         const inputs = general.querySelectorAll(".input");
         setJobTitle("");

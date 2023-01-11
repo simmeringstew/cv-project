@@ -52,7 +52,7 @@ const General = ({ displayGeneral, clearGeneral }) => {
                 <label className="user-label" htmlFor="phoneNumber">Number</label>
             </div>
             <div className="submit-reset">
-                <button className="btn-light" onClick={resetElements}>Reset</button>
+                <button className="btn-light" onClick={resetElements} type="button">Reset</button>
                 <button className="btn-color" type="submit">Submit</button>
             </div>
         </form>
