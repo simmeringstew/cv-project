@@ -30,7 +30,6 @@ const App = ({ workExperienceTemplate }) => {
   }
   const addNewWork = () => {
     const newTemplate = {...workExperienceTemplate};
-    console.log(newTemplate);
     newTemplate.id = workExperience.length + 1;
     setWorkExperience(workExperience.concat(newTemplate));
   }

@@ -17,6 +17,7 @@ const Work = ({ experience, workExperience, updateWorkExperience, addNewWork }) 
         const moreThan = workExperience.filter(experience => experience.id > index);
         const removedOne = moreThan.map(experience => removeOne(experience));
         const removed = [...lessThan, ...removedOne];
+        console.log(removed);
         updateWorkExperience(removed);
     }
     function removeOne(item) {
@@ -52,7 +53,7 @@ const Work = ({ experience, workExperience, updateWorkExperience, addNewWork }) 
                     {workExperience.length === experience.id && <button className="add-new" type="button" onClick={handleAdd}>+</button>}
                     <button className="btn-light" type="button">Reset</button>
                     <button className="btn-color" type="submit">Submit</button>
-                    {(workExperience.length !== 1 && experience.id !== 1) && <button className="remove" type="button" onClick={() => handleRemove(experience.id - 1)}>-</button>}
+                    {(workExperience.length !== 1 && experience.id !== 1) && <button className="remove" type="button" onClick={() => handleRemove(experience.id)}>-</button>}
                 </div>
             </form>
         </div>
