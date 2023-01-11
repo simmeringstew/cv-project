@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Work = ({ workAreaNumber, add, remove }) => {
+const Work = ({ workAreaNumber, add, remove, addWorkExperience }) => {
 
     const focusElement = (e) => {
         e.target.className = "input focused";
@@ -40,6 +40,15 @@ const Work = ({ workAreaNumber, add, remove }) => {
 
     const submit = (e) => {
         e.preventDefault();
+        const experienceObject = {
+            jobTitle: jobTitle,
+            company: company,
+            startDate: startDate,
+            endDate: endDate,
+            description: description,
+            id: workAreaNumber
+        }
+        addWorkExperience(experienceObject);
     }
 
     const addNew = () => {

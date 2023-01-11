@@ -38,19 +38,36 @@ const App = () => {
     setAmountOfWorkAreas([...lessThan, newNumber, ...addedOne]);
   }
   const removeWorkArea = (oneToRemove) => {
+    // prevent removing last work area
     if (amountOfWorkAreas.length === 1) {
       return;
     }
+    // if deleting the last experience
     const greaterThan = amountOfWorkAreas.filter(amount => amount > oneToRemove);
     if (greaterThan.length === 0) {
       setAmountOfWorkAreas(amountOfWorkAreas.filter(amount => amount !== oneToRemove));
+      if (workExperience.length > 0) {
+        setWorkExperience(workExperience.filter(experience => experience.id !== oneToRemove));
+      }
       return;
     }
+    // if deleting any other experience
     const minusOne = greaterThan.map(amount => amount - 1);
     const lessThan = amountOfWorkAreas.filter(amount => amount < oneToRemove);
     setAmountOfWorkAreas([...lessThan, ...minusOne]);
+    const biggerExperience = workExperience.filter(experience => experience.id > oneToRemove);
+    const experienceMinusOne = biggerExperience.map(experience => removeOneId(experience));
+    const experienceLessThan = workExperience.filter(experience => experience.id < oneToRemove);
+    setWorkExperience([...experienceLessThan, ...experienceMinusOne]);
   }
   const [workExperience, setWorkExperience] = useState([]);
+  const addWorkExperience = (experienceObject) => {
+    setWorkExperience(workExperience.concat(experienceObject));
+  }
+  function removeOneId(component) {
+    component.id = component.id - 1;
+    return component;
+  }
 
   return (
     <div>
@@ -63,7 +80,7 @@ const App = () => {
           <h2 className="form-title">Work Experience</h2>
           <div>
             {amountOfWorkAreas.map(area => 
-            <Work key={area} workAreaNumber={area} add={addWorkArea} remove={removeWorkArea} />
+            <Work key={area} workAreaNumber={area} add={addWorkArea} remove={removeWorkArea} addWorkExperience={addWorkExperience} />
             )}
           </div>
           {/* education - expandable */}
@@ -71,7 +88,9 @@ const App = () => {
         </section>
         <section className={"show"}>
           <GeneralDisplay info={generalInfo} />
-          {/* work display area */}
+          {workExperience.map(experience => 
+          <WorkDisplay key={experience.id} experience={experience} />
+          )}
           {/* once all are full add a print button turn section into pdf */}
         </section>
       </main>
