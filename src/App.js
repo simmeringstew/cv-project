@@ -24,12 +24,13 @@ const App = ({ workExperienceTemplate }) => {
   }
   const clearGeneral = () => {setGeneralInfo(null);}
 
-  const [workExperience, setWorkExperience] = useState([workExperienceTemplate]);
+  const [workExperience, setWorkExperience] = useState([{...workExperienceTemplate}]);
   const updateWorkExperience = (copy) => {
     setWorkExperience(copy);
   }
   const addNewWork = () => {
     const newTemplate = {...workExperienceTemplate};
+    console.log(newTemplate);
     newTemplate.id = workExperience.length + 1;
     setWorkExperience(workExperience.concat(newTemplate));
   }
