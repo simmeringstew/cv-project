@@ -30,7 +30,7 @@ const Work = ({ experience, workExperience, updateWorkExperience, addNewWork }) 
             <form className="form-element work">
                 <h3>Job: {experience.id}</h3>
                 <div className="input-group">
-                    <input type="text" autoComplete="off" className="input" id="jobTitle" value={experience.updateJobTitle} onChange={e => handleInputChange(e, experience.id - 1)} />
+                    <input type="text" autoComplete="off" className="input" id="jobTitle" value={experience.jobTitle} onChange={e => handleInputChange(e, experience.id - 1)} />
                     <label className="user-label" htmlFor="jobTitle">Job Title</label>
                 </div>
                 <div className="input-group">
