@@ -25,43 +25,30 @@ const App = ({ workTemplate }) => {
   const clearGeneral = () => {setGeneralInfo(null);}
 
   // work experience section
-  const [workComponents, setWorkComponents] = useState([workTemplate]);
-  const addWork = (data) => {
-    const updatedWork = {
-      jobTitle: data.jobTitle.trim(),
-      company: data.company.trim(),
-      startDate: data.startDate.trim(),
-      endDate: data.endDate.trim(),
-      description: data.description.trim(),
-      id: data.id
+  const [amountOfWorkAreas, setAmountOfWorkAreas] = useState([1]);
+  const addWorkArea = (number) => {
+    const newNumber = number + 1;
+    const equalOrMore = amountOfWorkAreas.filter(amount => amount >= newNumber);
+    if (equalOrMore.length === 0) {
+      setAmountOfWorkAreas(amountOfWorkAreas.concat(newNumber));
+      return;
     }
-    setWorkComponents(workComponents.map(component => component.id !== updatedWork.id ? component : updatedWork));
+    const lessThan = amountOfWorkAreas.filter(amount => amount < newNumber);
+    const addedOne = equalOrMore.map(amount => amount + 1);
+    setAmountOfWorkAreas([...lessThan, newNumber, ...addedOne]);
   }
-  const addJobArea = (data) => {
-    const newJobArea = {...workTemplate, id: data.id + 1};
-    const lessThan = workComponents.filter(component => component.id < newJobArea.id);
-    const onesToChange = workComponents.filter(component => component.id >= newJobArea.id);
-    const addedOne = onesToChange.map(addOneToId);
-    if (onesToChange.length > 0) {
-      setWorkComponents([...lessThan, newJobArea, ...addedOne]);
+  const removeWorkArea = (oneToRemove) => {
+    if (amountOfWorkAreas.length === 1) {
+      return;
     }
-    else {
-      setWorkComponents([...lessThan, newJobArea]);
+    const greaterThan = amountOfWorkAreas.filter(amount => amount > oneToRemove);
+    if (greaterThan.length === 0) {
+      setAmountOfWorkAreas(amountOfWorkAreas.filter(amount => amount !== oneToRemove));
+      return;
     }
-  }
-  function addOneToId(component) {
-    component.id += 1;
-    return component;
-  }
-  const removeJobArea = (data) => {
-    const lessThan = workComponents.filter(component => component.id < data.id);
-    const onesToChange = workComponents.filter(component => component.id > data.id);
-    const minusOne = onesToChange.map(removeOneFromId);
-    setWorkComponents([...lessThan, ...minusOne]);
-  }
-  function removeOneFromId(component) {
-    component.id -= 1;
-    return component;
+    const minusOne = greaterThan.map(amount => amount - 1);
+    const lessThan = amountOfWorkAreas.filter(amount => amount < oneToRemove);
+    setAmountOfWorkAreas([...lessThan, ...minusOne]);
   }
 
   return (
@@ -74,8 +61,8 @@ const App = ({ workTemplate }) => {
           <General displayGeneral={displayGeneral} clearGeneral={clearGeneral} />
           <h2 className="form-title">Work Experience</h2>
           <div>
-            {workComponents.map(component => 
-            <Work key={component.id} data={component} addWork={addWork} addJobArea={addJobArea} removeJobArea={removeJobArea} />
+            {amountOfWorkAreas.map(area => 
+            <Work key={area} workAreaNumber={area} add={addWorkArea} remove={removeWorkArea} />
             )}
           </div>
           {/* education - expandable */}
@@ -83,11 +70,7 @@ const App = ({ workTemplate }) => {
         </section>
         <section className={"show"}>
           <GeneralDisplay info={generalInfo} />
-          <div>
-            {workComponents.map(component =>
-            <WorkDisplay key={component.id} data={component} />
-            )}
-          </div>
+          {/* work display area */}
           {/* once all are full add a print button turn section into pdf */}
         </section>
       </main>

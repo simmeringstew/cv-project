@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Work = ({ data, addWork, addJobArea, removeJobArea }) => {
+const Work = ({ workAreaNumber, add, remove }) => {
 
     const focusElement = (e) => {
         e.target.className = "input focused";
@@ -12,30 +12,22 @@ const Work = ({ data, addWork, addJobArea, removeJobArea }) => {
         }
     }
 
-    const createData = () => {
-        data.jobTitle = jobTitle;
-        data.company = company;
-        data.startDate = startDate;
-        data.endDate = endDate;
-        data.description = description;
-    }
-
-    const [jobTitle, setJobTitle] = useState(data.jobTitle);
+    const [jobTitle, setJobTitle] = useState("");
     const updateJobTitle = (e) => {setJobTitle(e.target.value);}
 
-    const [company, setCompany] = useState(data.company);
+    const [company, setCompany] = useState("");
     const updateCompany = (e) => {setCompany(e.target.value);}
 
-    const [startDate, setStartDate] = useState(data.startDate);
+    const [startDate, setStartDate] = useState("");
     const updateStartDate = (e) => {setStartDate(e.target.value);}
 
-    const [endDate, setEndDate] = useState(data.endDate);
+    const [endDate, setEndDate] = useState("");
     const updateEndDate = (e) => {setEndDate(e.target.value);}
 
-    const [description, setDescription] = useState(data.description);
+    const [description, setDescription] = useState("");
     const updateDescription = (e) => {setDescription(e.target.value);}
 
-    const resetElements = () => {
+    const resetElements = (e) => {
         const general = document.querySelector(".general");
         const inputs = general.querySelectorAll(".input");
         setJobTitle("");
@@ -44,34 +36,24 @@ const Work = ({ data, addWork, addJobArea, removeJobArea }) => {
         setEndDate("");
         setDescription("");
         inputs.forEach(input => input.classList = "input");
-        // add ability to clear this one specifically if it has been submitted already
     }
 
     const submit = (e) => {
         e.preventDefault();
-        createData();
-        addWork(data);
     }
 
-    const addNew = (e) => {
-        e.preventDefault();
-        createData();
-        addJobArea(data);
+    const addNew = () => {
+        add(workAreaNumber);
     }
 
-    const toggleRemove = (e) => {
-        e.preventDefault();
-        createData();
-        removeJobArea(data);
+    const removeItem = () => {
+        remove(workAreaNumber);
     }
 
-    if (data.id <= 0) {
-        return
-    }
     return (
         <div>
             <form className="form-element work" onSubmit={submit}>
-                <h3>Job: {data.id}</h3>
+                <h3>Job: {workAreaNumber}</h3>
                 <div className="input-group">
                     <input type="text" autoComplete="off" className="input" id="jobTitle" value={jobTitle} onChange={updateJobTitle} onFocus={focusElement} onBlur={removeFocusElement} />
                     <label className="user-label" htmlFor="jobTitle">Job Title</label>
@@ -93,10 +75,10 @@ const Work = ({ data, addWork, addJobArea, removeJobArea }) => {
                     <label className="user-label" htmlFor="description">Description</label>
                 </div>
                 <div className="submit-reset">
-                    <button className="add-new" onClick={addNew}>+</button>
-                    <button className="btn-light" onClick={resetElements}>Reset</button>
+                    <button className="add-new" onClick={addNew} type="button">+</button>
+                    <button className="btn-light" onClick={resetElements} type="button">Reset</button>
                     <button className="btn-color" type="submit">Submit</button>
-                    <button className="remove" onClick={toggleRemove}>-</button>
+                    <button className="remove" onClick={removeItem} type="button">-</button>
                 </div>
             </form>
         </div>
