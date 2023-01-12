@@ -5,12 +5,13 @@ import General from "./components/general";
 import GeneralDisplay from "./components/generalDisplay";
 import Work from "./components/work";
 import WorkDisplay from "./components/workDisplay";
+import Education from "./components/education";
 // css imports 
 import "./styles/app.css";
 import "./styles/forms.css";
 import "./styles/display.css";
 
-const App = ({ generalTemplate, workExperienceTemplate }) => {
+const App = ({ generalTemplate, workExperienceTemplate, educationTemplate }) => {
 
   // for the general info
   const [generalInfo, setGeneralInfo] = useState({...generalTemplate});
@@ -29,6 +30,17 @@ const App = ({ generalTemplate, workExperienceTemplate }) => {
     setWorkExperience(workExperience.concat(newTemplate));
   }
 
+  // education section
+  const [education, setEducation] = useState([{...educationTemplate}]);
+  const updateEducation = (copy) => {
+    setEducation(copy);
+  }
+  const addNewEducation = () => {
+    const newTemplate = {...educationTemplate};
+    newTemplate.id = education.length + 1;
+    setEducation(education.concat(newTemplate));
+  }
+
 
   return (
     <div>
@@ -44,7 +56,12 @@ const App = ({ generalTemplate, workExperienceTemplate }) => {
             <Work key={experience.id} experience={experience} workExperience={workExperience} updateWorkExperience={updateWorkExperience} addNewWork={addNewWork} />
             )}
           </div>
-          {/* education - expandable */}
+          <h2 className="form-title">Education</h2>
+          <div>
+            {education.map(study => 
+            <Education key={study.id} study={study} education={education} updateEducation={updateEducation} addNewEducation={addNewEducation} />
+            )}
+          </div>
           {/* skills - auto-expand */}
         </section>
         <section className={"show"}>

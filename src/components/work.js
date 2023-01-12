@@ -17,7 +17,6 @@ const Work = ({ experience, workExperience, updateWorkExperience, addNewWork }) 
         const moreThan = workExperience.filter(experience => experience.id > index);
         const removedOne = moreThan.map(experience => removeOne(experience));
         const removed = [...lessThan, ...removedOne];
-        console.log(removed);
         updateWorkExperience(removed);
     }
     function removeOne(item) {
@@ -41,7 +40,7 @@ const Work = ({ experience, workExperience, updateWorkExperience, addNewWork }) 
                     <label className="user-label" htmlFor="jobTitle">Job Title</label>
                 </div>
                 <div className="input-group">
-                    <input type="text" name="company" autoComplete="off" className="input" id="company" value={experience.company} onChange={e => handleInputChange(e, experience.id - 1)} />
+                    <input type="text" autoComplete="off" className="input" id="company" value={experience.company} onChange={e => handleInputChange(e, experience.id - 1)} />
                     <label className="user-label" htmlFor="company">Company</label>
                 </div>
                 <div className="input-group">

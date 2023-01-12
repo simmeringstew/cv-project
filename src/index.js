@@ -19,4 +19,11 @@ const workExperienceTemplate = {
     id: 1
 };
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App generalTemplate={generalTemplate} workExperienceTemplate={workExperienceTemplate} />);
+const educationTemplate = {
+    degree: "",
+    school: "",
+    graduationYear: "",
+    id: 1
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App generalTemplate={generalTemplate} workExperienceTemplate={workExperienceTemplate} educationTemplate={educationTemplate} />);
