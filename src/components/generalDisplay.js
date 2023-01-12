@@ -1,17 +1,20 @@
-const GeneralDisplay = ({ info }) => {
-    if (!info) {
+const GeneralDisplay = ({ generalInfo }) => {
+    if (generalInfo.name === "" && generalInfo.email === "" && generalInfo.number === "") {
         return (
             <div></div>
         );
     }
     return (
         <div className="info-section">
-            <h2>{info.name}</h2>
+            {generalInfo.name !== "" && <h2>{generalInfo.name}</h2>}
+            {
+            (generalInfo.email !== "" || generalInfo.number !== "") && 
             <div className="email-number">
-                <span>{info.email}</span>
+                <span>{generalInfo.email}</span>
                 <span>-</span>
-                <span>{info.number}</span>
+                <span>{generalInfo.number}</span>
             </div>
+            }
         </div>
     );
 }

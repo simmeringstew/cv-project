@@ -32,8 +32,6 @@ const Work = ({ experience, workExperience, updateWorkExperience, addNewWork }) 
         updateWorkExperience(copy);
     }
 
-    console.log(experience);
-
     return (
         <div>
             <form className="form-element work">

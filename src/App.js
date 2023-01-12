@@ -10,20 +10,15 @@ import "./styles/app.css";
 import "./styles/forms.css";
 import "./styles/display.css";
 
-const App = ({ workExperienceTemplate }) => {
+const App = ({ generalTemplate, workExperienceTemplate }) => {
 
   // for the general info
-  const [generalInfo, setGeneralInfo] = useState(null);
-  const displayGeneral = (name, email, number) => {
-    const generalObject = {
-      name: name.trim(),
-      email: email.trim(),
-      number: number.trim()
-    }
-    setGeneralInfo(generalObject);
+  const [generalInfo, setGeneralInfo] = useState({...generalTemplate});
+  const updateGeneral = (copy) => {
+    setGeneralInfo(copy);
   }
-  const clearGeneral = () => {setGeneralInfo(null);}
-
+  
+  // work experience section
   const [workExperience, setWorkExperience] = useState([{...workExperienceTemplate}]);
   const updateWorkExperience = (copy) => {
     setWorkExperience(copy);
@@ -42,7 +37,7 @@ const App = ({ workExperienceTemplate }) => {
       </header>
       <main className={"container"}>
         <section className={"build"}>
-          <General displayGeneral={displayGeneral} clearGeneral={clearGeneral} />
+          <General generalInfo={generalInfo} updateGeneral={updateGeneral} />
           <h2 className="form-title">Work Experience</h2>
           <div>
             {workExperience.map(experience =>
@@ -53,6 +48,7 @@ const App = ({ workExperienceTemplate }) => {
           {/* skills - auto-expand */}
         </section>
         <section className={"show"}>
+          <GeneralDisplay generalInfo={generalInfo} />
           {workExperience.map(experience =>
           <WorkDisplay key={experience.id} experience={experience} />
           )}

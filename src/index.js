@@ -4,6 +4,12 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 
+const generalTemplate = {
+    name: "",
+    email: "",
+    number: ""
+};
+
 const workExperienceTemplate = {
     jobTitle: "",
     company: "",
@@ -13,4 +19,4 @@ const workExperienceTemplate = {
     id: 1
 };
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App workExperienceTemplate={workExperienceTemplate} />);
+ReactDOM.createRoot(document.getElementById("root")).render(<App generalTemplate={generalTemplate} workExperienceTemplate={workExperienceTemplate} />);

@@ -1,59 +1,36 @@
-import { useState } from "react";
+const General = ({ generalInfo, updateGeneral }) => {
 
-const General = ({ displayGeneral, clearGeneral }) => {
-
-    const focusElement = (e) => {
-        e.target.className = "input focused";
+    const handleInputChange = (e) => {
+        const value = e.target.value;
+        const toChange = e.target.id;
+        const copy = {...generalInfo};
+        copy[toChange] = value;
+        updateGeneral(copy);
     }
 
-    const removeFocusElement = (e) => {
-        if (!e.target.value) {
-            e.target.className = "input";
-        }
-    }
-
-    const [name, setName] = useState("");
-    const updateName = (e) => {setName(e.target.value);}
-
-    const [email, setEmail] = useState("");
-    const updateEmail = (e) => {setEmail(e.target.value);}
-
-    const [number, setNumber] = useState("");
-    const updateNumber = (e) => {setNumber(e.target.value);}
-
-    const resetElements = () => {
-        const general = document.querySelector(".general");
-        const inputs = general.querySelectorAll(".input");
-        setName("");
-        setNumber("");
-        setEmail("");
-        inputs.forEach(input => input.classList = "input");
-        clearGeneral();
-    }
-
-    const submit = (e) => {
-        e.preventDefault();
-        displayGeneral(name, email, number);
+    const handleReset = () => {
+        const copy = {...generalInfo};
+        Object.keys(copy).forEach(i => {copy[i] = ""; return copy;}, {});
+        updateGeneral(copy);
     }
 
     return (
-        <form className="form-element general" onSubmit={submit}>
+        <form className="form-element general">
             <h2 className="in-form-title">General Info</h2>
             <div className="input-group">
-                <input type="text" autoComplete="off" className="input" id="fullName" value={name} onChange={updateName} onFocus={focusElement} onBlur={removeFocusElement} />
-                <label className="user-label" htmlFor="fullName">Your Name</label>
+                <input type="text" autoComplete="off" className="input" id="name" value={generalInfo.name} onChange={e => handleInputChange(e)} />
+                <label className="user-label" htmlFor="name">Your Name</label>
             </div>
             <div className="input-group">
-                <input type="text" autoComplete="off" className="input" id="email" value={email} onChange={updateEmail} onFocus={focusElement} onBlur={removeFocusElement} />
+                <input type="text" autoComplete="off" className="input" id="email" value={generalInfo.email} onChange={e => handleInputChange(e)} />
                 <label className="user-label" htmlFor="email">Email</label>
             </div>
             <div className="input-group">
-                <input type="text" autoComplete="off" className="input" id="phoneNumber" value={number} onChange={updateNumber} onFocus={focusElement} onBlur={removeFocusElement} />
-                <label className="user-label" htmlFor="phoneNumber">Number</label>
+                <input type="text" autoComplete="off" className="input" id="number" value={generalInfo.number} onChange={e => handleInputChange(e)} />
+                <label className="user-label" htmlFor="number">Number</label>
             </div>
             <div className="submit-reset">
-                <button className="btn-light" onClick={resetElements} type="button">Reset</button>
-                <button className="btn-color" type="submit">Submit</button>
+                <button className="btn-color" type="button" onClick={() => handleReset()}>Reset</button>
             </div>
         </form>
     );
