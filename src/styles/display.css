@@ -14,7 +14,7 @@
     gap: 0.5rem;
 }
 
-.work-experience {
+.work-experience, .education {
     display: flex;
     flex-direction: column;
     gap: 1rem;

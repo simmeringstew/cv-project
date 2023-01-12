@@ -6,6 +6,7 @@ import GeneralDisplay from "./components/generalDisplay";
 import Work from "./components/work";
 import WorkDisplay from "./components/workDisplay";
 import Education from "./components/education";
+import EducationDisplay from "./components/educationDisplay";
 // css imports 
 import "./styles/app.css";
 import "./styles/forms.css";
@@ -68,6 +69,9 @@ const App = ({ generalTemplate, workExperienceTemplate, educationTemplate }) => 
           <GeneralDisplay generalInfo={generalInfo} />
           {workExperience.map(experience =>
           <WorkDisplay key={experience.id} experience={experience} />
+          )}
+          {education.map(study =>
+          <EducationDisplay key={study.id} study={study} />
           )}
         </section>
       </main>
