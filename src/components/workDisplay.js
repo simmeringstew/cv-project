@@ -8,25 +8,31 @@ const WorkDisplay = ({ experience }) => {
         return (
             <div className="work-experience">
                 <h2 className="section-title">Experience</h2>
-                <h3 className="section-subtitle">{experience.jobTitle}</h3>
-                <h4 className="section-minititle">{experience.company}</h4>
+                {experience.jobTitle !== "" && <h3 className="section-subtitle">{experience.jobTitle}</h3>}
+                {experience.company !== "" && <h4 className="section-minititle">{experience.company}</h4>}
+                {
+                (experience.startDate !== "" || experience.endDate !== "") && 
                 <div className="dates">
                     <span>From: {experience.startDate}</span>
                     <span>To: {experience.endDate}</span>
                 </div>
-                <p className="description">{experience.description}</p>
+                }
+                {experience.description !== "" && <p className="description">{experience.description}</p>}
             </div>
         );
     }
     return (
         <div className="work-experience">
-            <h3 className="section-subtitle">{experience.jobTitle}</h3>
-            <h4 className="section-minititle">{experience.company}</h4>
+            {experience.jobTitle !== "" && <h3 className="section-subtitle">{experience.jobTitle}</h3>}
+            {experience.company !== "" && <h4 className="section-minititle">{experience.company}</h4>}
+            {
+            (experience.startDate !== "" || experience.endDate !== "") && 
             <div className="dates">
                 <span>From: {experience.startDate}</span>
                 <span>To: {experience.endDate}</span>
             </div>
-            <p className="description">{experience.description}</p>
+            }
+            {experience.description !== "" && <p className="description">{experience.description}</p>}
         </div>
     );
 }
