@@ -26,4 +26,9 @@ const educationTemplate = {
     id: 1
 };
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App generalTemplate={generalTemplate} workExperienceTemplate={workExperienceTemplate} educationTemplate={educationTemplate} />);
+const skillTemplate = {
+    skill: "",
+    id: 1
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App generalTemplate={generalTemplate} workExperienceTemplate={workExperienceTemplate} educationTemplate={educationTemplate} skillTemplate={skillTemplate} />);

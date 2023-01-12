@@ -110,3 +110,7 @@
     left: 55%;
     transform: translate(-55%);
 }
+
+.skill-input {
+    margin-bottom: 1rem;
+}

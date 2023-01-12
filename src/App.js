@@ -7,12 +7,14 @@ import Work from "./components/work";
 import WorkDisplay from "./components/workDisplay";
 import Education from "./components/education";
 import EducationDisplay from "./components/educationDisplay";
+import Skills from "./components/skills";
+import SkillsDisplay from "./components/skillsDisplay";
 // css imports 
 import "./styles/app.css";
 import "./styles/forms.css";
 import "./styles/display.css";
 
-const App = ({ generalTemplate, workExperienceTemplate, educationTemplate }) => {
+const App = ({ generalTemplate, workExperienceTemplate, educationTemplate, skillTemplate }) => {
 
   // for the general info
   const [generalInfo, setGeneralInfo] = useState({...generalTemplate});
@@ -42,6 +44,16 @@ const App = ({ generalTemplate, workExperienceTemplate, educationTemplate }) => 
     setEducation(education.concat(newTemplate));
   }
 
+  // skills section
+  const [skills, setSkills] = useState([{...skillTemplate}]);
+  const updateSkills = (copy) => {
+    setSkills(copy);
+  }
+  const addNewSkill = () => {
+    const newTemplate = {...skillTemplate};
+    newTemplate.id = skills.length + 1;
+    setSkills(skills.concat(newTemplate));
+  }
 
   return (
     <div>
@@ -63,7 +75,12 @@ const App = ({ generalTemplate, workExperienceTemplate, educationTemplate }) => 
             <Education key={study.id} study={study} education={education} updateEducation={updateEducation} addNewEducation={addNewEducation} />
             )}
           </div>
-          {/* skills - auto-expand */}
+          <h2 className="form-title">Skills - Enter to add new - Delete to remove</h2>
+          <div>
+            {skills.map(skill => 
+            <Skills key={skill.id} skill={skill} skills={skills} updateSkills={updateSkills} addNewSkill={addNewSkill} />
+            )}
+          </div>
         </section>
         <section className={"show"}>
           <GeneralDisplay generalInfo={generalInfo} />
@@ -73,6 +90,7 @@ const App = ({ generalTemplate, workExperienceTemplate, educationTemplate }) => 
           {education.map(study =>
           <EducationDisplay key={study.id} study={study} />
           )}
+          <SkillsDisplay skills={skills} />
         </section>
       </main>
     </div>
