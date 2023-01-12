@@ -60,7 +60,7 @@
     margin-bottom: 1rem;
 }
 
-.btn-color, .btn-light {
+.btn-color {
     width: 8rem;
 }
 
@@ -82,26 +82,8 @@
     filter: brightness(90%);
 }
 
-.btn-color:active, .btn-light:active {
+.btn-color:active {
     transform: scaleX(0.5);
-}
-
-.btn-light {
-    display: inline-block;
-    outline: none;
-    cursor: pointer;
-    line-height: 20px;
-    font-weight: 700;
-    border-radius: 8px;
-    padding: 0.8125em 1.4375em;
-    border: 1px solid var(--clr-action-secondary);
-    transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
-    background: transparent;
-    color: var(--clr-action-secondary);
-}
-
-.btn-light:is(:hover, :focus) {
-    background: var(--clr-black-focus);
 }
 
 .add-new, .remove {

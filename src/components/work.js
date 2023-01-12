@@ -25,6 +25,15 @@ const Work = ({ experience, workExperience, updateWorkExperience, addNewWork }) 
         return item;
     }
 
+    const handleReset = (index) => {
+        const copy = [...workExperience];
+        Object.keys(copy[index]).forEach(i => {copy[index][i] = ""; return copy;}, {});
+        copy[index].id = index + 1;
+        updateWorkExperience(copy);
+    }
+
+    console.log(experience);
+
     return (
         <div>
             <form className="form-element work">
@@ -51,8 +60,7 @@ const Work = ({ experience, workExperience, updateWorkExperience, addNewWork }) 
                 </div>
                 <div className="submit-reset">
                     {workExperience.length === experience.id && <button className="add-new" type="button" onClick={handleAdd}>+</button>}
-                    <button className="btn-light" type="button">Reset</button>
-                    <button className="btn-color" type="submit">Submit</button>
+                    <button className="btn-color" type="button" onClick={() => handleReset(experience.id - 1)}>Reset</button>
                     {(workExperience.length !== 1 && experience.id !== 1) && <button className="remove" type="button" onClick={() => handleRemove(experience.id)}>-</button>}
                 </div>
             </form>
